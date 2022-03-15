@@ -41,7 +41,29 @@ class DequeNodeTest {
 
         assertEquals(lastNode, firstNode.getNext());
         assertEquals(firstNode, lastNode.getPrevious());
+    }
 
+    @Test
+    public void createdTwoLinkedNodesAndTestFirstAndLast(){
+        DequeNode<Integer> firstNode = new DequeNode<>(0, null, null);
+        DequeNode<Integer> lastNode = new DequeNode<>(1, null, firstNode);
+        firstNode.setNext(lastNode);
+
+        assertTrue(firstNode.isFirstNode());
+        assertFalse(firstNode.isLastNode());
+        assertFalse(lastNode.isFirstNode());
+        assertTrue(lastNode.isLastNode());
+    }
+
+    @Test
+    public void createdMiddleNode(){
+        DequeNode<Integer> firstNode = new DequeNode<>(0, null, null);
+        DequeNode<Integer> middleNode = new DequeNode<>(1, null, firstNode);
+        DequeNode<Integer> lastNode = new DequeNode<>(1, null, middleNode);
+        firstNode.setNext(middleNode);
+        middleNode.setNext(lastNode);
+
+        assertTrue(middleNode.isNotATerminalNode());
     }
 
     @Test
