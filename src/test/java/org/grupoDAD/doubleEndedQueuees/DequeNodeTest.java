@@ -44,5 +44,30 @@ class DequeNodeTest {
 
     }
 
+    @Test
+    public void ItemShouldBe10InNodeGiven10InSetter(){
+        int expectedItem=10;
+        DequeNode<Integer> node = new DequeNode<>(0, null, null);
+        node.setItem(10);
+        assertEquals(expectedItem,node.getItem());
+    }
+
+    @Test
+    public void PreviousNodeShouldNotBeNullAfterSettingPrevious(){
+        DequeNode<Integer> firstNode = new DequeNode<>(0, null, null);
+        DequeNode<Integer> lastNode = new DequeNode<>(1, null, null);
+        lastNode.setPrevious(firstNode);
+
+        assertEquals(firstNode, lastNode.getPrevious());
+    }
+
+    @Test
+    public void NextNodeShouldNotBeNullAfterSettingNext(){
+        DequeNode<Integer> firstNode = new DequeNode<>(0, null, null);
+        DequeNode<Integer> lastNode = new DequeNode<>(1, null, null);
+        firstNode.setNext(lastNode);
+
+        assertEquals(lastNode, firstNode.getNext());
+    }
 
 }
