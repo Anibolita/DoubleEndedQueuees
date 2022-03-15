@@ -24,6 +24,13 @@ public class DequeNode<T> {
         return previous;
     }
 
+
+    public T setItem(T item) {this.item = item;}
+
+    public DequeNode<T> setNext(DequeNode<T> next) {this.next=next;}
+
+    public DequeNode<T> setPrevious(DequeNode<T> previous) {this.previous=previous;}
+
     public DequeNode(T item, DequeNode<T> next, DequeNode<T> previous) {
         this.item = item ;
         this.next = next ;
