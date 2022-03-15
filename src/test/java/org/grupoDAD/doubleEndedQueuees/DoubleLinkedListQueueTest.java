@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DoubleLinkedListQueueTest {
 
     @Test
-    public void createValidNotNullIntegerValuesListShould(){
+    public void createValidNotNullIntegerValuesListUsingAppend(){
         DequeNode<Integer> expectedFirstNode = new DequeNode<>(0, null, null);
         DequeNode<Integer> expectedLastNode = new DequeNode<>(1, null, null);
         int expectedSize = 2;
@@ -23,14 +23,15 @@ class DoubleLinkedListQueueTest {
     }
 
     @Test
-    public void createValidNotNullIntegerValuesListUsingAppend(){
+    public void createValidNotNullIntegerValuesListUsingAppendLeft(){
         DequeNode<Integer> expectedFirstNode = new DequeNode<>(0, null, null);
         DequeNode<Integer> expectedLastNode = new DequeNode<>(1, null, null);
         int expectedSize = 2;
 
         DoubleLinkedListQueue<Integer> obtainedList = new DoubleLinkedListQueue<>();
-        obtainedList.append(expectedFirstNode);
-        obtainedList.append(expectedLastNode);
+        obtainedList.appendLeft(expectedLastNode);
+        obtainedList.appendLeft(expectedFirstNode);
+
 
         assertEquals(expectedFirstNode, obtainedList.peekFirst());
         assertEquals(expectedLastNode, obtainedList.peekLast());
