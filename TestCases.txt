@@ -1,0 +1,21 @@
+Test DequeNode:
+1. Create a new node not null and valid.
+2. Create a first node and test isFirst() method.
+3. Create a last node and test isLast() method.
+4. Create two linked nodes.
+5. Create two linked nodes and test isFirst() and isLast() on them.
+6. Test item is not null after setItem() method.
+7. Test previous is not null after setPrevious() method.
+8. Test next is not null after setNext() method.
+9. Create three linked nodes and test isNotATerminalNode() method.
+
+Test DoubleLinkedListQueueTest:
+1. Create an empty list and return size 0.
+2. Delete the first element of a list with a single node and get an empty list.
+3. Delete the last element of a list with a single node and get an empty list.
+4. Delete the first element of a list and return the second one as the root.
+5. Delete the last element of a list and return the previous one.
+6. Should return an empty list after append an empty node.
+7. Should return an empty list after append left an empty node.
+8. Create a valid not empty list with 3 nodes using append.
+9. Create a valid not empty list with 3 nodes using append left.
