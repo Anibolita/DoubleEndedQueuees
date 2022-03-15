@@ -8,37 +8,42 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
         root = null;
     }
 
+    public DequeNode<T> getRoot(){return root;}
     @Override
     public void append(DequeNode<T> node) {
-        if(root != null) {
-            DequeNode<T> currentNode = root;
+        if(node!=null){
+            if(root != null) {
+                DequeNode<T> currentNode = root;
 
-            while (currentNode.getNext() != null) {
-                currentNode = currentNode.getNext();
+                while (currentNode.getNext() != null) {
+                    currentNode = currentNode.getNext();
+                }
+
+                currentNode.setNext(node);
+                node.setPrevious(currentNode);
+            }else{
+                root = node;
+                root.setNext(null);
+                root.setPrevious(null);
             }
-
-            currentNode.setNext(node);
-            node.setPrevious(currentNode);
-        }else{
-            root = node;
-            root.setNext(null);
-            root.setPrevious(null);
         }
     }
 
     @Override
     public void appendLeft(DequeNode<T> node) {
-        if(root != null) {
-            node.setNext(root);
-            node.setPrevious(null);
+        if(node!=null){
+            if(root != null) {
+                node.setNext(root);
+                node.setPrevious(null);
 
-            root.setPrevious(node);
+                root.setPrevious(node);
 
-            root = node;
-        }else{
-            root = node;
-            root.setNext(null);
-            root.setPrevious(null);
+                root = node;
+            }else{
+                root = node;
+                root.setNext(null);
+                root.setPrevious(null);
+            }
         }
     }
 
