@@ -123,4 +123,12 @@ class DoubleLinkedListQueueTest {
 
     }
 
+
+    @Test
+    public void mustThrowRunTimeExceptionGivenEmptyList(){
+        assertThrows(RuntimeException.class, ()-> doubleLinkedListQueue.append(null));
+    }
+
+
+
 }

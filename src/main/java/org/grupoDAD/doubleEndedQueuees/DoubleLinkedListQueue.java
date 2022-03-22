@@ -28,7 +28,7 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
                 root.setPrevious(null);
             }
         }else{
-            throw new RuntimeException("Empy List");
+            throw new RuntimeException("Given Null Node");
         }
     }
 
@@ -48,7 +48,7 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
                 root.setPrevious(null);
             }
         }else{
-            throw new RuntimeException("Empy List");
+            throw new RuntimeException("Given Null Node");
         }
     }
 
@@ -92,6 +92,9 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
 
     @Override
     public DequeNode<T> peekFirst() {
+        if(root==null){
+            throw new RuntimeException("Empty List");
+        }
         return root;
     }
 
