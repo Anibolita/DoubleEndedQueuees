@@ -77,17 +77,6 @@ class DoubleLinkedListQueueTest {
         assertEquals(expectedValue,doubleLinkedListQueue.peekLast());
     }
 
-    @Test
-    public void shouldReturnNullAfterAppendANullNode(){
-        doubleLinkedListQueue.append(null);
-        assertNull(doubleLinkedListQueue.getRoot());
-    }
-
-    @Test
-    public void shouldReturnNullAfterAppendLeftANullNode(){
-        doubleLinkedListQueue.appendLeft(null);
-        assertNull(doubleLinkedListQueue.getRoot());
-    }
 
     @Test
     public void createValidNotNullIntegerValuesListUsingAppend(){
@@ -175,6 +164,31 @@ class DoubleLinkedListQueueTest {
         DequeNode<Integer> obtainedValue = doubleLinkedListQueue.find(expectedValue.getItem());
 
         assertEquals(expectedValue,obtainedValue);
+
+    }
+
+
+    @ParameterizedTest
+    @ValueSource(ints = { 1, 2, 3 })
+    public void SizeAfterDeleteMustBeOneUnitLower(int pos){
+        DequeNode<Integer> FirstNode = new DequeNode<>(0, null, null);
+        DequeNode<Integer> SecondNode = new DequeNode<>(4, null, null);
+        DequeNode<Integer> ThirdNode = new DequeNode<>(2, null, null);
+
+        doubleLinkedListQueue.append(FirstNode);
+        doubleLinkedListQueue.append(SecondNode);
+        doubleLinkedListQueue.append(ThirdNode);
+        DequeNode<Integer> nodeToDelete = doubleLinkedListQueue.getAt(pos);
+
+        int expectedValue = doubleLinkedListQueue.size()-1;
+
+        doubleLinkedListQueue.delete(nodeToDelete);
+
+        int obtainedValue = doubleLinkedListQueue.size();
+
+        assertEquals(expectedValue,obtainedValue);
+
+
 
     }
 

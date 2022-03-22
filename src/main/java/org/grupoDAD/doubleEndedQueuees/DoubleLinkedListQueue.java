@@ -128,7 +128,7 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
 
     @Override
     public DequeNode<T> getAt(int position) {
-        DequeNode<T> currentNode = null;
+        DequeNode<T> currentNode;
 
         if(position >= 1 && position <= this.size()){
             currentNode = root;
@@ -144,7 +144,7 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
 
     @Override
     public DequeNode<T> find(T item) {
-        DequeNode<T> currentNode = null;
+        DequeNode<T> currentNode;
 
         if(root != null){
             currentNode = root;
