@@ -1,5 +1,7 @@
 package org.grupoDAD.doubleEndedQueuees;
 
+import java.util.Comparator;
+
 public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
 
     private DequeNode<T> root;
@@ -25,6 +27,8 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
                 root.setNext(null);
                 root.setPrevious(null);
             }
+        }else{
+            throw new RuntimeException("Empy List");
         }
     }
 
@@ -43,6 +47,8 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
                 root.setNext(null);
                 root.setPrevious(null);
             }
+        }else{
+            throw new RuntimeException("Empy List");
         }
     }
 
@@ -56,6 +62,8 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
             }
 
             root = newRoot;
+        }else{
+            throw new RuntimeException("Empy List");
         }
     }
 
@@ -77,7 +85,8 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
             }else{
                 root = null;
             }
-
+        }else{
+            throw new RuntimeException("Empy List");
         }
     }
 
@@ -94,6 +103,8 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
             while (currentNode.getNext() != null) {
                 currentNode = currentNode.getNext();
             }
+        }else{
+            throw new RuntimeException("Empy List");
         }
 
         return currentNode;
@@ -110,6 +121,67 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
         }
 
         return size;
+    }
+
+    @Override
+    public DequeNode<T> getAt(int position) {
+        DequeNode<T> currentNode = null;
+
+        if(position >= 0 && position <= this.size()){
+            currentNode = root;
+            for(int i = 0; i < position; i++){
+                currentNode = currentNode.getNext();
+            }
+        }else{
+            throw new RuntimeException("Not Valid Position");
+        }
+
+        return currentNode;
+    }
+
+    @Override
+    public DequeNode<T> find(T item) {
+        DequeNode<T> currentNode = null;
+
+        if(root != null){
+            currentNode = root;
+            int size = size();
+            int cont = 1;
+            while(cont <= size && !currentNode.getItem().equals(item)){
+                currentNode = currentNode.getNext();
+                cont++;
+            }
+        }else{
+            throw new RuntimeException("Empy List");
+        }
+
+        return currentNode;
+    }
+
+    @Override
+    public void delete(DequeNode<T> node) {
+
+        if(root != null){
+            if(node != null){
+                if(node.equals(root)){
+                    root = node.getNext();
+                }else if(node.getNext() == null){
+                    node.getPrevious().setNext(null);
+                }else{
+                    node.getPrevious().setNext(node.getNext());
+                    node.getNext().setPrevious(node.getPrevious());
+                }
+            }else{
+                throw new RuntimeException("Given Null Node");
+            }
+        }else{
+            throw new RuntimeException("Empy List");
+        }
+    }
+
+    @Override
+    public void sort(Comparator<?> comparator) {
+
     }
 
     public DequeNode<T> getRoot(){return root;}
