@@ -130,9 +130,9 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
     public DequeNode<T> getAt(int position) {
         DequeNode<T> currentNode = null;
 
-        if(position >= 0 && position <= this.size()){
+        if(position >= 1 && position <= this.size()){
             currentNode = root;
-            for(int i = 0; i < position; i++){
+            for(int i = 1; i < position; i++){
                 currentNode = currentNode.getNext();
             }
         }else{
