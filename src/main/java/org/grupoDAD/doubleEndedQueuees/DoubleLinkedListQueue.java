@@ -183,9 +183,30 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
     }
 
     @Override
-    public void sort(Comparator<?> comparator) {
+    public void sort(Comparator<T> comparator) {
 
+        DequeNode<T> current = null, index = null;
+        T temp;
+        //Check whether list is empty
+        if(root == null) {
+            throw new RuntimeException("Empy List");
+        }
+        else {
+            //Current will point to head
+            for(current = root; current.getNext() != null; current = current.getNext()) {
+                //Index will point to node next to current
+                for(index = current.getNext(); index != null; index = index.getNext()) {
+                    //If current's data is greater than index's data, swap the data of current and index
+                    if(comparator.compare(current.getItem(), index.getItem()) > 0) {
+                        temp = current.getItem();
+                        current.setItem(index.getItem());
+                        index.setItem(temp);
+                    }
+                }
+            }
+        }
     }
 
     public DequeNode<T> getRoot(){return root;}
+
 }

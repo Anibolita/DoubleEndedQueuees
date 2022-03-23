@@ -6,20 +6,29 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Comparator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DoubleLinkedListQueueTest {
 
     private DoubleLinkedListQueue<Integer> doubleLinkedListQueue;
 
+    Comparator<Integer> com = new Comparator<Integer>() {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return (o1 < o2)?0 : 1;
+        }
+    };
+
     @BeforeEach
     public void setUp(){
-        doubleLinkedListQueue=new DoubleLinkedListQueue<>();
+        doubleLinkedListQueue = new DoubleLinkedListQueue<>();
     }
 
     @AfterEach
     public void tearDown(){
-        doubleLinkedListQueue=null;
+        doubleLinkedListQueue = null;
     }
 
     @Test
@@ -188,9 +197,61 @@ class DoubleLinkedListQueueTest {
 
         assertEquals(expectedValue,obtainedValue);
 
+    }
 
+    @Test
+    public void mustReturnASortedListGivenValuesFromCeroToFour(){
+        DequeNode<Integer> NodeOne = new DequeNode<>(0, null, null);
+        DequeNode<Integer> NodeTwo = new DequeNode<>(1, null, null);
+        DequeNode<Integer> NodeThree = new DequeNode<>(2, null, null);
+        DequeNode<Integer> NodeFour = new DequeNode<>(3, null, null);
+        DequeNode<Integer> NodeFive = new DequeNode<>(4, null, null);
+
+        doubleLinkedListQueue.append(NodeOne);
+        doubleLinkedListQueue.append(NodeFour);
+        doubleLinkedListQueue.append(NodeFive);
+        doubleLinkedListQueue.append(NodeTwo);
+        doubleLinkedListQueue.append(NodeThree);
+
+        doubleLinkedListQueue.sort(com);
+
+        assertEquals(0,doubleLinkedListQueue.getAt(1).getItem());
+        assertEquals(1,doubleLinkedListQueue.getAt(2).getItem());
+        assertEquals(2,doubleLinkedListQueue.getAt(3).getItem());
+        assertEquals(3,doubleLinkedListQueue.getAt(4).getItem());
+        assertEquals(4,doubleLinkedListQueue.getAt(5).getItem());
 
     }
 
+    @Test
+    public void mustReturnASortedListGivenRepeatedElemtens(){
+        DequeNode<Integer> NodeOne = new DequeNode<>(0, null, null);
+        DequeNode<Integer> NodeTwo = new DequeNode<>(5, null, null);
+        DequeNode<Integer> NodeThree = new DequeNode<>(5, null, null);
+        DequeNode<Integer> NodeFour = new DequeNode<>(7, null, null);
+        DequeNode<Integer> NodeFive = new DequeNode<>(8, null, null);
+
+        doubleLinkedListQueue.append(NodeOne);
+        doubleLinkedListQueue.append(NodeFour);
+        doubleLinkedListQueue.append(NodeFive);
+        doubleLinkedListQueue.append(NodeTwo);
+        doubleLinkedListQueue.append(NodeThree);
+
+        doubleLinkedListQueue.sort(com);
+
+        assertEquals(0,doubleLinkedListQueue.getAt(1).getItem());
+        assertEquals(5,doubleLinkedListQueue.getAt(2).getItem());
+        assertEquals(5,doubleLinkedListQueue.getAt(3).getItem());
+        assertEquals(7,doubleLinkedListQueue.getAt(4).getItem());
+        assertEquals(8,doubleLinkedListQueue.getAt(5).getItem());
+
+    }
+
+    @Test
+    public void mustThrowRunTimeExceptionWhenTryToSortEmptyList(){
+        DoubleLinkedListQueue<Integer> emptyList = new DoubleLinkedListQueue<>();
+
+        assertThrows(RuntimeException.class, ()-> emptyList.sort(com));
+    }
 
 }
