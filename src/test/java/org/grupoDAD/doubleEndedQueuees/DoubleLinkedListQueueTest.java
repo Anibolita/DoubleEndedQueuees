@@ -200,7 +200,7 @@ class DoubleLinkedListQueueTest {
     }
 
     @Test
-    public void mustReturnASortedListGivenValuesFromCeroToFour(){
+    public void mustReturnASortedListGivenValuesFromZeroToFour(){
         DequeNode<Integer> NodeOne = new DequeNode<>(0, null, null);
         DequeNode<Integer> NodeTwo = new DequeNode<>(1, null, null);
         DequeNode<Integer> NodeThree = new DequeNode<>(2, null, null);
@@ -224,7 +224,7 @@ class DoubleLinkedListQueueTest {
     }
 
     @Test
-    public void mustReturnASortedListGivenRepeatedElemtens(){
+    public void mustReturnASortedListGivenRepeatedElements(){
         DequeNode<Integer> NodeOne = new DequeNode<>(0, null, null);
         DequeNode<Integer> NodeTwo = new DequeNode<>(5, null, null);
         DequeNode<Integer> NodeThree = new DequeNode<>(5, null, null);
