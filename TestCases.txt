@@ -15,7 +15,13 @@ Test DoubleLinkedListQueueTest:
 3. Delete the last element of a list with a single node and get an empty list.
 4. Delete the first element of a list and return the second one as the root.
 5. Delete the last element of a list and return the previous one.
-6. Should return an empty list after append an empty node.
-7. Should return an empty list after append left an empty node.
-8. Create a valid not empty list with 3 nodes using append.
-9. Create a valid not empty list with 3 nodes using append left.
+6. Create a valid not empty list with 3 nodes using append.
+7. Create a valid not empty list with 3 nodes using append left.
+8. Throw RunTimeException given an empty list to various functions.
+9. Throw RunTimeException given null node to append and delete.
+10. Throw RunTimeException not valid position to getAt function.
+11. Return node in find function given his item.
+12. Size of list with elements must be 1 unit lower after delete an element
+13. Return a sorted list given values from zero to four.
+14. Return a sorted list given repeated elements.
+15. Throw RunTimeException in sort function given an empty list.
