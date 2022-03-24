@@ -1,5 +1,7 @@
 package org.grupoDAD.doubleEndedQueuees;
 
+import java.util.Comparator;
+
 public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
 
     private DequeNode<T> root;
@@ -25,6 +27,8 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
                 root.setNext(null);
                 root.setPrevious(null);
             }
+        }else{
+            throw new RuntimeException("Given Null Node");
         }
     }
 
@@ -43,6 +47,8 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
                 root.setNext(null);
                 root.setPrevious(null);
             }
+        }else{
+            throw new RuntimeException("Given Null Node");
         }
     }
 
@@ -56,6 +62,8 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
             }
 
             root = newRoot;
+        }else{
+            throw new RuntimeException("Empy List");
         }
     }
 
@@ -77,12 +85,16 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
             }else{
                 root = null;
             }
-
+        }else{
+            throw new RuntimeException("Empy List");
         }
     }
 
     @Override
     public DequeNode<T> peekFirst() {
+        if(root==null){
+            throw new RuntimeException("Empty List");
+        }
         return root;
     }
 
@@ -94,6 +106,8 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
             while (currentNode.getNext() != null) {
                 currentNode = currentNode.getNext();
             }
+        }else{
+            throw new RuntimeException("Empy List");
         }
 
         return currentNode;
@@ -112,5 +126,87 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
         return size;
     }
 
+    @Override
+    public DequeNode<T> getAt(int position) {
+        DequeNode<T> currentNode;
+
+        if(position >= 1 && position <= this.size()){
+            currentNode = root;
+            for(int i = 1; i < position; i++){
+                currentNode = currentNode.getNext();
+            }
+        }else{
+            throw new RuntimeException("Not Valid Position");
+        }
+
+        return currentNode;
+    }
+
+    @Override
+    public DequeNode<T> find(T item) {
+        DequeNode<T> currentNode;
+
+        if(root != null){
+            currentNode = root;
+            int size = size();
+            int cont = 1;
+            while(cont <= size && !currentNode.getItem().equals(item)){
+                currentNode = currentNode.getNext();
+                cont++;
+            }
+        }else{
+            throw new RuntimeException("Empy List");
+        }
+
+        return currentNode;
+    }
+
+    @Override
+    public void delete(DequeNode<T> node) {
+
+        if(root != null){
+            if(node != null){
+                if(node.equals(root)){
+                    root = node.getNext();
+                }else if(node.getNext() == null){
+                    node.getPrevious().setNext(null);
+                }else{
+                    node.getPrevious().setNext(node.getNext());
+                    node.getNext().setPrevious(node.getPrevious());
+                }
+            }else{
+                throw new RuntimeException("Given Null Node");
+            }
+        }else{
+            throw new RuntimeException("Empy List");
+        }
+    }
+
+    @Override
+    public void sort(Comparator<T> comparator) {
+
+        DequeNode<T> current = null, index = null;
+        T temp;
+        //Check whether list is empty
+        if(root == null) {
+            throw new RuntimeException("Empy List");
+        }
+        else {
+            //Current will point to head
+            for(current = root; current.getNext() != null; current = current.getNext()) {
+                //Index will point to node next to current
+                for(index = current.getNext(); index != null; index = index.getNext()) {
+                    //If current's data is greater than index's data, swap the data of current and index
+                    if(comparator.compare(current.getItem(), index.getItem()) > 0) {
+                        temp = current.getItem();
+                        current.setItem(index.getItem());
+                        index.setItem(temp);
+                    }
+                }
+            }
+        }
+    }
+
     public DequeNode<T> getRoot(){return root;}
+
 }
